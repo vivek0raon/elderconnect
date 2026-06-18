@@ -7,7 +7,7 @@ A full-stack MERN platform for discovering, booking, and reviewing professional 
 1. **Role-based authentication** — JWT login/register for Customer, Elder, Caretaker, and Admin roles.
 2. **Caretaker discovery and search** — Filter caretakers by city, service type, price, and rating.
 3. **Verified caretaker profiles** — Bios, certifications, hourly rate, languages, and weekly availability.
-4. **Interactive Mapbox map view** — Browse caretakers geographically across multiple cities.
+4. **Interactive Leaflet map view** — Browse caretakers geographically across multiple cities.
 5. **Booking workflow** — Customers create bookings; caretakers accept/complete them with status transitions.
 6. **Calendar and availability checks** — Server-side validation against the caretaker's weekly schedule.
 7. **Stripe checkout** — Secure test-mode card payments with a dedicated Stripe payment page.
@@ -20,7 +20,7 @@ A full-stack MERN platform for discovering, booking, and reviewing professional 
 
 ## Tech Stack
 
-- **Frontend:** React 19, Vite, React Router, Tailwind CSS, Axios, Stripe.js, Mapbox GL, Socket.io Client
+- **Frontend:** React 19, Vite, React Router, Tailwind CSS, Axios, Stripe.js, Leaflet, Socket.io Client
 - **Backend:** Node.js, Express 5, Mongoose 9, Socket.io 4, JWT, bcryptjs, Stripe SDK
 - **Database:** MongoDB (local or MongoDB Atlas)
 - **Tooling:** ESLint, Nodemon, MongoMemoryServer (seed)
@@ -31,7 +31,7 @@ A full-stack MERN platform for discovering, booking, and reviewing professional 
 - npm v9 or higher
 - MongoDB v6+ running locally, or a MongoDB Atlas connection string
 - A Stripe account (test keys) for the payment flow
-- A Mapbox account (public token) for the map view
+- Map views are powered by Leaflet & CartoDB tiles (no map api keys or accounts required)
 
 ## Installation
 
@@ -71,7 +71,6 @@ CLIENT_URL=http://localhost:5173
 VITE_API_URL=http://localhost:5000/api
 VITE_SOCKET_URL=http://localhost:5000
 VITE_STRIPE_PUBLISHABLE_KEY=pk_test_...
-VITE_MAPBOX_TOKEN=pk.eyJ...
 ```
 
 | Variable | Where | Purpose |
@@ -84,7 +83,6 @@ VITE_MAPBOX_TOKEN=pk.eyJ...
 | `VITE_API_URL` | client | Base URL for REST calls |
 | `VITE_SOCKET_URL` | client | Socket.io server URL |
 | `VITE_STRIPE_PUBLISHABLE_KEY` | client | Stripe.js publishable key |
-| `VITE_MAPBOX_TOKEN` | client | Mapbox GL public access token |
 
 ## Running Locally
 
@@ -215,24 +213,6 @@ Base URL: `http://localhost:5000/api`
 | --- | --- | --- | --- |
 | GET | `/api/health` | public | Service heartbeat |
 
-## Demo Login Credentials
-
-All seeded users share the password below unless noted.
-
-| Role | Email | Password |
-| --- | --- | --- |
-| Admin | `admin@elderconnect.com` | `admin123` |
-| Customer | `sarah@example.com` | `password123` |
-| Customer | `michael@example.com` | `password123` |
-| Customer | `emily@example.com` | `password123` |
-| Elder | `margaret@example.com` | `password123` |
-| Elder | `robert@example.com` | `password123` |
-| Elder | `dorothy@example.com` | `password123` |
-| Caretaker | `alice@eldercare.com` | `password123` |
-| Caretaker | `james@eldercare.com` | `password123` |
-| Caretaker | `patricia@eldercare.com` | `password123` |
-| Caretaker | `william@eldercare.com` | `password123` |
-| Caretaker | `linda@eldercare.com` | `password123` |
 
 ## Project Structure
 
